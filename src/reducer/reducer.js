@@ -1,18 +1,41 @@
 import types from '../types';
 
 const initialState = {
-  myPortfolio: [],
+  funds: 0,
+  portfolio: [],
+  portfolioError: undefined,
+  searchResults: [],
+  searchError: undefined,
+  searchValue: '',
+
 }
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case types.STOCK_BUY_SUCCESS:
+    case types.FUNDS_UPDATE:
       return {
         ...state,
-        myPortfolio: [
-          ...state.myPortfolio,
-          action.payload,
-        ],
+        funds: action.payload,
+      }
+    case types.STOCK_SEARCH_CHANGE:
+      return {
+        ...state,
+        searchValue: action.payload,
+      }
+    case types.STOCK_SEARCH_SUCCESS:
+      return {
+        ...state,
+        searchResults: action.payload,
+      };
+    case types.STOCK_SEARCH_ERROR:
+      return {
+        ...state,
+        searchError: action.payload,
+      };
+    case types.STOCK_SEARCH_CLEAR_ERROR:
+      return {
+        ...state,
+        searchError: undefined,
       };
     default:
       return state;
