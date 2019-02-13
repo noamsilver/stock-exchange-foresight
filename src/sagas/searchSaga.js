@@ -13,7 +13,10 @@ export function * searchSaga() {
       yield put(actions.searchError(res.error.message));
     } else {
       yield put(actions.searchResults(res.stocks));
+      yield put(actions.searchPopupShow());
     }
+  } else {
+    yield put(actions.searchPopupHide());
   }
 };
 

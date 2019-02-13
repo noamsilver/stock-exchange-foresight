@@ -7,7 +7,7 @@ const initialState = {
   searchResults: [],
   searchError: undefined,
   searchValue: '',
-
+  showSearchPopup: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +36,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searchError: undefined,
+      };
+    case types.SEARCH_POPUP_SHOW:
+      return {
+        ...state,
+        showSearchPopup: true,
+      };
+    case types.SEARCH_POPUP_HIDE:
+      return {
+        ...state,
+        showSearchPopup: false,
       };
     default:
       return state;
