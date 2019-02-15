@@ -72,26 +72,46 @@ const reducer = (state = initialState, action) => {
         portfolioError: action.payload,
       };
     case types.MARKET_PORTFOLIO_UPDATE_SUCCESS:
+      let showStockPopupPortfolio = state.showStockPopup;
       return {
         ...state,
         portfolio: state.portfolio.map(stock => {
-          const update = action.payload.find(updatedStock => stock.symbol === updatedStock.symbol);
+          const update = action.payload.find(updatedStock => {
+            if (showStockPopupPortfolio && showStockPopupPortfolio.symbol === updatedStock.symbol) {
+              showStockPopupPortfolio = {
+                ...showStockPopupPortfolio,
+                ...updatedStock,
+              }
+            }
+            return stock.symbol === updatedStock.symbol;
+          });
           return {
             ...stock,
             ...update,
           }
         }),
+        showStockPopup: showStockPopupPortfolio,
       };
     case types.MARKET_SEARCH_UPDATE_SUCCESS:
+    let showStockPopupSearch = state.showStockPopup;
       return {
         ...state,
         searchResults: state.searchResults.map(stock => {
-          const update = action.payload.find(updatedStock => stock.symbol === updatedStock.symbol);
+          const update = action.payload.find(updatedStock => {
+            if (showStockPopupSearch && showStockPopupSearch.symbol === updatedStock.symbol) {
+              showStockPopupSearch = {
+                ...showStockPopupSearch,
+                ...updatedStock,
+              }
+            }
+            return stock.symbol === updatedStock.symbol;
+          });
           return {
             ...stock,
             ...update,
           }
         }),
+        showStockPopup: showStockPopupSearch,
       };
     default:
       return state;
