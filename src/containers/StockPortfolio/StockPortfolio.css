@@ -1,0 +1,15 @@
+#stock-portfolio {
+  padding: 10px;
+}
+
+#stock-portfolio table {
+  border-collapse: collapse;
+}
+
+#stock-portfolio th, #stock-portfolio td {
+  border: 1px solid black;
+}
+
+#stock-portfolio th {
+  border-top: 0px solid white;
+}

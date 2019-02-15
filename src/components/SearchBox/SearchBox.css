@@ -5,7 +5,14 @@
   text-align: center;
 }
 
-.search-input {
+#search-box svg {
+  position: absolute;
+  top: 17px;
+  right: 0;
+  cursor: pointer;
+}
+
+#search-box .search-input {
   width: 100%;
   padding: 5px;
   border-radius: 8px;
@@ -13,7 +20,7 @@
   outline: unset;
 }
 
-.search-imput::placeholder {
+#search-box .search-imput::placeholder {
   color: black;
   opacity: 0.5;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import StockModule from '../../components/StockModule';
 import TopBar from '../TopBar';
 import StockPortfolio from '../StockPortfolio';
@@ -12,4 +11,4 @@ const Market = () => (
   </div>
 );
 
-export default connect()(Market);
+export default Market;

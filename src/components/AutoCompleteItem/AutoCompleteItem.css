@@ -2,4 +2,9 @@
   margin-top: 5px;
   margin-bottom: 5px;
   border-top: 1px solid black;
+  cursor: pointer;
+}
+
+.auto-complete-item:first-child {
+  border-top: none;
 }

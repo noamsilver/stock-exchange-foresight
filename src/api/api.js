@@ -13,7 +13,7 @@ export default {
     
     return await getResObj(res);
   },
-  buy: async (stock, quantity) => {
+  buy: async (symbol, quantity) => {
     const res = await fetch('http://int.v2x.foresightauto.com/stock-exchange-service/market/buy', {
       method: 'POST',
       headers: {
@@ -21,14 +21,14 @@ export default {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        stockSymbol: stock,
+        stockSymbol: symbol,
         stockQuantity: quantity,
       }),
     });
     
     return await getResObj(res);
   },
-  sell: async (stock) => {
+  sell: async (symbol) => {
     const res = await fetch('http://int.v2x.foresightauto.com/stock-exchange-service/market/sell', {
       method: 'POST',
       headers: {
@@ -36,7 +36,7 @@ export default {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        stockSymbol: stock,
+        stockSymbol: symbol,
       }),
     });
     
@@ -44,7 +44,7 @@ export default {
   },
   portfolio: async () => {
     const res = await fetch('http://int.v2x.foresightauto.com/stock-exchange-service/portfolio', {
-      mode: 'GET',
+      method: 'GET',
       headers: {
         Accept: '*/*'
       }
@@ -65,7 +65,7 @@ export default {
   },
   reset: async () => {
     const res = await fetch('http://int.v2x.foresightauto.com/stock-exchange-service/management', {
-      mode: 'DELETE',
+      method: 'DELETE',
       headers: {
         Accept: '*/*'
       }

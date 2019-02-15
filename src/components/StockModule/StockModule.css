@@ -1,11 +1,9 @@
 #stock-module {
   display: block;
   position: fixed;
-  z-index: 9999999999999;
   width: 100vw;
   height: 100vh;
-  background-color: black;
-  opacity: 0.6;
+  background-color: rgba(0, 0, 0, 0.6);
   text-align: center;
 }
 
@@ -19,5 +17,11 @@
   top: 80px;
   background-color: white;
   border-radius: 6px;
-  padding: 15px;
+  padding: 10px;
+}
+
+#stock-module .stock-inner-module svg {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
 }

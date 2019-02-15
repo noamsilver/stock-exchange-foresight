@@ -3,12 +3,12 @@ import types from '../types';
 const initialState = {
   funds: 0,
   portfolio: [],
-  portfolioError: undefined,
+  portfolioError: null,
   searchResults: [],
-  searchError: undefined,
+  searchError: null,
   searchValue: '',
   showSearchPopup: false,
-  showStockPopup: undefined,
+  showStockPopup: null,
   showStockPopupToBuy: false,
 }
 
@@ -37,7 +37,7 @@ const reducer = (state = initialState, action) => {
     case types.STOCK_SEARCH_CLEAR_ERROR:
       return {
         ...state,
-        searchError: undefined,
+        searchError: null,
       };
     case types.SEARCH_POPUP_SHOW:
       return {
@@ -59,7 +59,39 @@ const reducer = (state = initialState, action) => {
     case types.STOCK_POPUP_HIDE:
       return {
         ...state,
-        showStockPopup: undefined,
+        showStockPopup: null,
+      };
+    case types.STOCK_PORTFOLIO_SUCCESS:
+      return {
+        ...state,
+        portfolio: action.payload,
+      };
+    case types.STOCK_PORTFOLIO_ERROR:
+      return {
+        ...state,
+        portfolioError: action.payload,
+      };
+    case types.MARKET_PORTFOLIO_UPDATE_SUCCESS:
+      return {
+        ...state,
+        portfolio: state.portfolio.map(stock => {
+          const update = action.payload.find(updatedStock => stock.symbol === updatedStock.symbol);
+          return {
+            ...stock,
+            ...update,
+          }
+        }),
+      };
+    case types.MARKET_SEARCH_UPDATE_SUCCESS:
+      return {
+        ...state,
+        searchResults: state.searchResults.map(stock => {
+          const update = action.payload.find(updatedStock => stock.symbol === updatedStock.symbol);
+          return {
+            ...stock,
+            ...update,
+          }
+        }),
       };
     default:
       return state;
