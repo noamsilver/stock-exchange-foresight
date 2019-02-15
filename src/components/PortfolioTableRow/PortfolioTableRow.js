@@ -1,11 +1,12 @@
 import React from 'react';
 
-const PortfolioTableRow = ({name, symbol, purchasePrice, currentPrice, quantity, tradedSince}) => {
+const PortfolioTableRow = ({name, symbol, purchasePrice, currentPrice, quantity, tradedSince, onClick}) => {
   const purchaseValue = purchasePrice * quantity;
   const currentValue = currentPrice * quantity;
   console.log({purchasePrice, purchaseValue, currentPrice, currentValue})
   return (
-    <tr>
+    <tr
+    onClick={onClick}>
       <td>{name}</td>
       <td>{symbol}</td>
       <td>{purchasePrice}</td>

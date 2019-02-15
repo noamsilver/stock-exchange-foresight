@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import actions from '../../actions';
 import PortfolioTableRow from '../../components/PortfolioTableRow'
 
-const StockPortfolio = ({ portfolio }) => {
+const StockPortfolio = ({ portfolio, onClick }) => {
   console.log({portfolio})
   return (
     <div id='stock-portfolio'>
@@ -27,15 +28,20 @@ const StockPortfolio = ({ portfolio }) => {
             currentPrice={stock.currentPrice}
             quantity={stock.quantity}
             tradedSince={new Date(stock.startOfCommerce).toLocaleDateString()}
+            onClick={() => onClick(stock)}
           />)}
         </tbody>
       </table>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = state => ({
   portfolio: state.portfolio,
-})
+});
 
-export default connect(mapStateToProps)(StockPortfolio);
+const mapDispatchToProps = dispatch => ({
+  onClick: (stock) => dispatch(actions.stockPopupShow(stock)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StockPortfolio);

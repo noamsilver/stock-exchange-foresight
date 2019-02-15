@@ -1,3 +1,7 @@
+#stock-portfolio table tbody tr {
+  cursor: pointer;
+}
+
 #stock-portfolio table tr td.value.loss {
   background-color: rgba(255, 0, 0, 0.3);
 }

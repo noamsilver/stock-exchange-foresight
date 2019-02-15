@@ -93,7 +93,7 @@ const reducer = (state = initialState, action) => {
         showStockPopup: showStockPopupPortfolio,
       };
     case types.MARKET_SEARCH_UPDATE_SUCCESS:
-    let showStockPopupSearch = state.showStockPopup;
+      let showStockPopupSearch = state.showStockPopup;
       return {
         ...state,
         searchResults: state.searchResults.map(stock => {
@@ -113,6 +113,13 @@ const reducer = (state = initialState, action) => {
         }),
         showStockPopup: showStockPopupSearch,
       };
+    case types.STOCK_BUY_SUCCESS:
+    case types.STOCK_SELL_SUCCESS:
+      return {
+        ...state,
+        showStockPopup: null,
+        showSearchPopup: false,
+      }
     default:
       return state;
   };
