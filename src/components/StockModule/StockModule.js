@@ -25,7 +25,7 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
       <h1>{isToBuy ? 'Buy Stock' : 'Sell Stock'}</h1>
       <div>Name: {stock.name}</div>
       <div>Symbol: {stock.symbol}</div>
-      {!isToBuy && <div>Purchase Price: {stock.purchesPrice}</div>}
+      {!isToBuy && <div>Purchase Price: {stock.purchasePrice}</div>}
       <div>Current Price: {stock.currentPrice}</div>
       {!isToBuy && <div>Quantity: {stock.quantity}</div>}
       {!isToBuy && <div
