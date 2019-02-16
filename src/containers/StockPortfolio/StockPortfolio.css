@@ -1,5 +1,8 @@
 #stock-portfolio {
+  position: relative;
   padding: 10px;
+  overflow: auto;
+  z-index: 5;
 }
 
 #stock-portfolio table {
