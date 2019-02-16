@@ -4,6 +4,7 @@ import buySaga from './buySaga';
 import sellSaga from './sellSaga';
 import watchPorfolioSaga, { portfolioSaga } from './portfolioSaga';
 import autoMarketUpdateSaga, { watchMarketUpdateSaga } from './marketUpdateSaga';
+import resetSaga from './resetSaga';
 
 // eslint-disable-next-line
 function * helloSaga() {
@@ -20,5 +21,6 @@ export default function * rootSaga() {
     call(watchPorfolioSaga),
     call(watchMarketUpdateSaga),
     call(autoMarketUpdateSaga),
+    call(resetSaga),
   ]);
 };
