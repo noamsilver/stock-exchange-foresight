@@ -3,7 +3,6 @@ import React from 'react';
 const PortfolioTableRow = ({name, symbol, purchasePrice, currentPrice, quantity, tradedSince, onClick}) => {
   const purchaseValue = purchasePrice * quantity;
   const currentValue = currentPrice * quantity;
-  console.log({purchasePrice, purchaseValue, currentPrice, currentValue})
   return (
     <tr
     onClick={onClick}>
@@ -12,7 +11,19 @@ const PortfolioTableRow = ({name, symbol, purchasePrice, currentPrice, quantity,
       <td>{purchasePrice}</td>
       <td>{currentPrice}</td>
       <td>{quantity}</td>
-      <td className={'value' + (currentValue < purchaseValue ? ' loss' : ' profit')}>{currentValue}</td>
+      <td className={'value' + (
+        currentPrice ?
+          (currentValue < purchaseValue ?
+            ' loss' :
+            currentValue === purchaseValue ?
+              '' :
+              ' profit'
+          ) :
+          ''
+        )
+      }>
+        {currentValue ? currentValue : 'Loadeing...'}
+      </td>
       <td>{tradedSince}</td>
     </tr>
   );

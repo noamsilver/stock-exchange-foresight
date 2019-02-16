@@ -10,7 +10,6 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
     purchaseValue = stock.purchasePrice * stock.quantity;
     currentValue = stock.currentPrice * stock.quantity;
   }
-  console.log({stock, isToBuy})
   return <div
     id='stock-module'
     className={stock ? 'show-stock-module' : 'hide-stock-module'}
@@ -29,9 +28,18 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
       <div>Current Price: {stock.currentPrice}</div>
       {!isToBuy && <div>Quantity: {stock.quantity}</div>}
       {!isToBuy && <div
-        className={'value' + (currentValue < purchaseValue ? ' loss' : ' profit')}
+        className={'value' + (
+          currentValue ?
+            (currentValue < purchaseValue ?
+              ' loss' :
+              currentValue === purchaseValue ?
+                '' :
+                ' profit'
+            ) :
+            ''
+        )}
       >
-        Value: {currentValue}
+        Value: {currentValue ? currentValue : 'Loadeing...'}
       </div>}
       <div>Traded Since: {new Date(stock.startOfCommerce).toLocaleDateString()}</div>
       {isToBuy && <input
@@ -42,13 +50,11 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
       ></input>}
       <button
         onClick={isToBuy ? () => {
-          console.log('button buy Clicked',{value, integer: Number.isInteger(value), parse: Number.parseInt(value), gt0: Number.parseInt(value) > 0});
           const quantity = Number.parseInt(value);
           if (Number.isInteger(quantity) && quantity > 0) {
             buy(stock.symbol, quantity);
           };
         } : () => {
-          console.log('button sell Clicked');
           sell(stock.symbol);
         }}
       >

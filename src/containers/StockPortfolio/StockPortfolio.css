@@ -16,3 +16,13 @@
 #stock-portfolio th {
   border-top: 0px solid white;
 }
+
+#stock-module .stock-inner-module .value.loss {
+  background-color: rgba(255, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+#stock-module .stock-inner-module .value.profit {
+  background-color: rgba(0, 128, 0, 0.3);
+  border-radius: 8px;
+}
