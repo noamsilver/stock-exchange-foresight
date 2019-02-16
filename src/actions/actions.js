@@ -167,4 +167,10 @@ export default {
   marketResetClearError: () => ({
     type: types.MARKET_RESET_CLEAR_ERROR,
   }),
+
+  //Portfolio sort change
+  portfolioSortChange: sortData => ({
+    type: types.PORTFOLIO_SORT_CHANGE,
+    payload: sortData,
+  })
 }

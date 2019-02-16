@@ -4,6 +4,11 @@ const initialState = {
   funds: 0,
   portfolio: [],
   portfolioError: null,
+  portfolioSortBy: {
+    name: 'name',
+    type: 'text',
+    order: 'asc',
+  },
   searchResults: [],
   searchError: null,
   searchValue: '',
@@ -120,6 +125,11 @@ const reducer = (state = initialState, action) => {
         showStockPopup: null,
         showSearchPopup: false,
         searchValue: '',
+      }
+    case types.PORTFOLIO_SORT_CHANGE:
+      return {
+        ...state,
+        portfolioSortBy: action.payload,
       }
     default:
       return state;

@@ -15,6 +15,12 @@
 
 #stock-portfolio th {
   border-top: 0px solid white;
+  cursor: pointer;
+}
+
+#stock-portfolio th.sort-by {
+  text-decoration: underline;
+  background-color: rgba(128, 0, 128, 0.2);
 }
 
 #stock-module .stock-inner-module .value.loss {
