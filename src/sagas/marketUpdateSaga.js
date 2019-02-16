@@ -5,15 +5,12 @@ import actions from '../actions';
 
 export function * marketUpdateSaga() {
   const state = yield select();
-  console.log({state})
   const portfolioStocks = state.portfolio.map(stock => stock.symbol);
   const searchStocks = state.searchResults.map(stock => stock.symbol);
-  console.log({portfolioStocks, searchStocks})
   let portfolioRes = undefined;
   let searchRes = undefined;
   switch (true) {
     case (portfolioStocks.length > 0) && (searchStocks.length > 0):
-      console.log('both');
        const res = yield all([
         call(api.market, portfolioStocks),
         call(api.market, searchStocks),
@@ -21,11 +18,9 @@ export function * marketUpdateSaga() {
       [portfolioRes, searchRes] = res
       break;
       case (portfolioStocks.length > 0) && (searchStocks.length === 0):
-      console.log('portfolio');
       portfolioRes = yield call(api.market, portfolioStocks);
       break;
       case (portfolioStocks.length === 0) && (searchStocks.length > 0):
-      console.log('search');
       searchRes = yield call(api.market, searchStocks);
       break;
     default:

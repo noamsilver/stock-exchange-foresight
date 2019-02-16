@@ -1,10 +1,10 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import api from '../api';
 import types from '../types';
 import actions from '../actions';
 
 export function * resetSaga() {
-  const res = yield api.reset();
+  const res = yield call(api.reset);
   console.log({resetRes: res})
   if (res.err) {
     yield put(actions.marketResetError(res.err.message));

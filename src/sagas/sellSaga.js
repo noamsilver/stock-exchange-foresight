@@ -1,11 +1,11 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import api from '../api';
 import types from '../types';
 import actions from '../actions';
 
 export function * sellSaga(action) {
   yield put(actions.stockSellClearError());
-  const res = yield api.sell(action.payload);
+  const res = yield call(api.sell, action.payload);
   console.log({sellRes: res})
   if (res.err) {
     yield put(actions.stockSellError(res.err.message));

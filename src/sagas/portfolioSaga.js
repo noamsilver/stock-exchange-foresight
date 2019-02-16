@@ -1,10 +1,10 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import api from '../api';
 import types from '../types';
 import actions from '../actions';
 
 export function * portfolioSaga() {
-  const res = yield api.portfolio();
+  const res = yield call(api.portfolio);
   console.log({portfolioRes: res});
   if (res.err) {
     yield put(actions.portfolioError(res.err.message));
