@@ -1,5 +1,5 @@
 #search-box {
-  display: inline-block;
+  display: block;
   position: relative;
   padding: 5px;
   text-align: center;

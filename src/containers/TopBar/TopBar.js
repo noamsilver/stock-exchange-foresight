@@ -6,8 +6,8 @@ import ResetMarketButton from '../../components/ResetMarketButton';
 const TopBar = () => (
   <div id='top-bar'>
     <Funds />
-    <SearchBox />
     <ResetMarketButton />
+    <SearchBox />
   </div>
 );
 
