@@ -119,6 +119,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         showStockPopup: null,
         showSearchPopup: false,
+        searchValue: '',
       }
     default:
       return state;

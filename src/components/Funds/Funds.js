@@ -9,5 +9,8 @@ const Funds = ({ funds }) => (
 
 const mapStateToProps = (state) => ({
   funds: state.funds,
-})
-export default connect(mapStateToProps)(Funds);
+});
+
+export default connect(
+  mapStateToProps
+)(Funds);

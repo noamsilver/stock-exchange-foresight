@@ -4,7 +4,6 @@ import actions from '../../actions';
 import PortfolioTableRow from '../../components/PortfolioTableRow'
 
 const StockPortfolio = ({ portfolio, onClick }) => {
-  console.log({portfolio})
   return (
     <div id='stock-portfolio'>
       <table>
@@ -41,7 +40,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClick: (stock) => dispatch(actions.stockPopupShow(stock)),
+  onClick: (stock) => {
+    dispatch(actions.searchChange(''));
+    dispatch(actions.searchPopupHide());
+    dispatch(actions.stockPopupShow(stock));
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(StockPortfolio);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StockPortfolio);
