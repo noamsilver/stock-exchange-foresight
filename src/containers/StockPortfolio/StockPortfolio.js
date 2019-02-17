@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../../actions';
-import PortfolioTableRow from '../../components/PortfolioTableRow'
+import PortfolioTableRow from '../../components/PortfolioTableRow';
+import { ReactComponent as X } from '../../assets/images/clear-x.svg';
 
-const StockPortfolio = ({ portfolio, sortBy, onClick, changeSort }) => {
+const StockPortfolio = ({ portfolio, sortBy, error, onClick, changeSort, clearError }) => {
   if (portfolio && portfolio[0] && portfolio[0].name) {
     portfolio.sort((a, b) => {
       switch (sortBy.type) {
@@ -26,6 +27,14 @@ const StockPortfolio = ({ portfolio, sortBy, onClick, changeSort }) => {
   return (
     <div id='stock-portfolio'>
       <h1>My Portfolio</h1>
+      <div className='error'>
+        {error}
+        {error.length > 0 && <X
+          width={10}
+          height={10}
+          onClick={clearError}
+        />}
+      </div>
       <table>
         <thead>
           <tr>
@@ -100,6 +109,7 @@ const StockPortfolio = ({ portfolio, sortBy, onClick, changeSort }) => {
           />)}
         </tbody>
       </table>
+      {portfolio.length === 0 ? <span>There are no stocks currently in your portfolio.</span> : ''}
     </div>
   );
 };
@@ -107,6 +117,7 @@ const StockPortfolio = ({ portfolio, sortBy, onClick, changeSort }) => {
 const mapStateToProps = state => ({
   portfolio: state.portfolio,
   sortBy: state.portfolioSortBy,
+  error: state.portfolioError,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -116,6 +127,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.stockPopupShow(stock));
   },
   changeSort: sortData => dispatch(actions.portfolioSortChange(sortData)),
+  clearError: () => dispatch(actions.portfolioClearError()),
 });
 
 export default connect(

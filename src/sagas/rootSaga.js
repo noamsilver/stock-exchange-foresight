@@ -6,14 +6,8 @@ import watchPorfolioSaga, { portfolioSaga } from './portfolioSaga';
 import autoMarketUpdateSaga, { watchMarketUpdateSaga } from './marketUpdateSaga';
 import resetSaga from './resetSaga';
 
-// eslint-disable-next-line
-function * helloSaga() {
-  console.log('Hello Saga!');
-}
-
 export default function * rootSaga() {
   yield all([
-    call(helloSaga),
     call(searchSaga),
     call(buySaga),
     call(sellSaga),

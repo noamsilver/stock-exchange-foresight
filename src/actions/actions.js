@@ -41,6 +41,7 @@ export default {
     type: types.SEARCH_POPUP_HIDE,
   }),
 
+  //Stock popup
   stockPopupShow: stock => ({
     type: types.STOCK_POPUP_SHOW,
     payload: stock,

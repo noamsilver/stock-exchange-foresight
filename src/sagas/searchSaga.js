@@ -7,7 +7,6 @@ export function * searchSaga() {
   const state = yield select();
   if (state.searchValue.length > 0) {
     const res = yield call(api.search, state.searchValue);
-    console.log({searchRes: res});
     if (res.err) {
       yield put(actions.searchError(res.err.message));
     } else {

@@ -3,18 +3,20 @@ import types from '../types';
 const initialState = {
   funds: 0,
   portfolio: [],
-  portfolioError: null,
+  portfolioError: '',
   portfolioSortBy: {
     name: 'name',
     type: 'text',
     order: 'asc',
   },
   searchResults: [],
-  searchError: null,
+  searchError: '',
   searchValue: '',
   showSearchPopup: false,
   showStockPopup: null,
   showStockPopupToBuy: false,
+  stockPopupError: '',
+  resetMarketError: '',
 }
 
 const reducer = (state = initialState, action) => {
@@ -42,7 +44,7 @@ const reducer = (state = initialState, action) => {
     case types.STOCK_SEARCH_CLEAR_ERROR:
       return {
         ...state,
-        searchError: null,
+        searchError: '',
       };
     case types.SEARCH_POPUP_SHOW:
       return {
@@ -66,6 +68,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         showStockPopup: null,
       };
+    case types.STOCK_POPUP_ERROR:
+    case types.STOCK_BUY_ERROR:
+    case types.STOCK_SELL_ERROR:
+      return {
+        ...state,
+        stockPopupError: action.payload,
+      };
+    case types.STOCK_POPUP_CLEAR_ERROR:
+    case types.STOCK_BUY_CLEAR_ERROR:
+    case types.STOCK_SELL_CLEAR_ERROR:
+      return {
+        ...state,
+        stockPopupError: '',
+      };
     case types.STOCK_PORTFOLIO_SUCCESS:
       return {
         ...state,
@@ -76,6 +92,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         portfolioError: action.payload,
       };
+    case types.STOCK_PORTFOLIO_CLEAR_ERROR:
+      return {
+        ...state,
+        portfolioError: '',
+      }
     case types.MARKET_PORTFOLIO_UPDATE_SUCCESS:
       let showStockPopupPortfolio = state.showStockPopup;
       return {
@@ -130,6 +151,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         portfolioSortBy: action.payload,
+      }
+    case types.MARKET_RESET_ERROR:
+      return {
+        ...state,
+        resetMarketError: action.payload,
+      }
+    case types.MARKET_RESET_CLEAR_ERROR:
+      return {
+        ...state,
+        resetMarketError: '',
       }
     default:
       return state;

@@ -26,3 +26,7 @@
   right: 10px;
   cursor: pointer;
 }
+
+#stock-module .stock-inner-module button, #stock-module .stock-inner-module input {
+  font-size: 18px;
+}

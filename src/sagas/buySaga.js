@@ -5,9 +5,7 @@ import actions from '../actions';
 
 export function * buySaga(action) {
   yield put(actions.stockBuyClearError());
-  
   const res = yield call(api.buy, action.payload.symbol, action.payload.quantity);
-  console.log({buyRes: res})
   if (res.err) {
     yield put(actions.stockBuyError(res.err.message));
   } else {

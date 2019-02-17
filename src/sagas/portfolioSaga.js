@@ -5,7 +5,6 @@ import actions from '../actions';
 
 export function * portfolioSaga() {
   const res = yield call(api.portfolio);
-  console.log({portfolioRes: res});
   if (res.err) {
     yield put(actions.portfolioError(res.err.message));
   } else {

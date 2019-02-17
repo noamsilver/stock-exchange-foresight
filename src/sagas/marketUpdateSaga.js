@@ -26,10 +26,6 @@ export function * marketUpdateSaga() {
     default:
       break;
   }
-  console.log({
-    marketUpdatePortfolioRes: portfolioRes,
-    marketUpdateSearchRes: searchRes,
-  });
   if (portfolioRes && !portfolioRes.err) {
     yield put(actions.marketPortfolioUpdateSuccess(portfolioRes.stocks));
   }

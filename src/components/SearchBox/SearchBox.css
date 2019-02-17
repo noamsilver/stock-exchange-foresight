@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+#search-box .error {
+  text-align: start;
+}
+
 #search-box svg {
   position: absolute;
   top: 17px;

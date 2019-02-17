@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import actions from '../../actions';
 import { ReactComponent as X } from '../../assets/images/clear-x.svg';
 
-const StockModule = ({stock, isToBuy, buy, sell, close}) => {
+const StockModule = ({stock, isToBuy, funds, error, buy, sell, close, showError, clearError}) => {
   const [value, setValue] = useState('');
   let purchaseValue = undefined, currentValue = undefined;
   if (stock && !isToBuy) {
@@ -19,7 +19,10 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
       <X
         width={25}
         height={25}
-        onClick={close}
+        onClick={() => {
+          clearError();
+          close();
+        }}
       />
       <h1>{isToBuy ? 'Buy Stock' : 'Sell Stock'}</h1>
       <div>Name: {stock.name}</div>
@@ -45,14 +48,21 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
       {isToBuy && <input
         type='number'
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={e => {
+          clearError();
+          setValue(e.target.value);
+        }}
         placeholder='Enter quantity'
       ></input>}
       <button
         onClick={isToBuy ? () => {
           const quantity = Number.parseInt(value);
           if (Number.isInteger(quantity) && quantity > 0) {
-            buy(stock.symbol, quantity);
+            if ((quantity * stock.currentPrice) <= funds) {
+              buy(stock.symbol, quantity);
+            } else {
+              showError('Your account has insufficient funds to complete the current transaction')
+            }
           };
         } : () => {
           sell(stock.symbol);
@@ -60,6 +70,7 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
       >
         {isToBuy ? 'Buy' : 'Sell'}
       </button>
+      <div className='error'>{error}</div>
     </div>
     }
   </div>
@@ -68,12 +79,16 @@ const StockModule = ({stock, isToBuy, buy, sell, close}) => {
 const mapStateToProps = state => ({
   stock: state.showStockPopup,
   isToBuy: state.showStockPopupToBuy,
+  funds: state.funds,
+  error: state.stockPopupError,
 })
 
 const mapDispatchToProps = dispatch => ({
   buy: (symbol, quantity) => dispatch(actions.stockBuyInit(symbol, quantity)),
   sell: symbol => dispatch(actions.stockSellInit(symbol)),
-  close: () => dispatch(actions.stockPopupHide())
+  close: () => dispatch(actions.stockPopupHide()),
+  showError: error => dispatch(actions.stockPopupError(error)),
+  clearError: error => dispatch(actions.stockPopupClearError()),
 })
 
 export default connect(

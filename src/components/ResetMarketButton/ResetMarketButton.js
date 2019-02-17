@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../../actions';
 
-const ResetMarketButton = ({ onClick }) => (
+const ResetMarketButton = ({ error, onClick }) => (
   <div id='reset-market-button'>
+    <span className='error'>{error}</span>
     <button
       onClick={onClick}>
       Reset Market
@@ -11,11 +12,15 @@ const ResetMarketButton = ({ onClick }) => (
   </div>
 );
 
+const mapStateToProps = state => ({
+  error: state.resetMarketError,
+})
+
 const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch(actions.marketResetInit()),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ResetMarketButton);

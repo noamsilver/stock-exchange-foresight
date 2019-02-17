@@ -6,7 +6,6 @@ import actions from '../actions';
 export function * sellSaga(action) {
   yield put(actions.stockSellClearError());
   const res = yield call(api.sell, action.payload);
-  console.log({sellRes: res})
   if (res.err) {
     yield put(actions.stockSellError(res.err.message));
   } else {
